@@ -38,6 +38,6 @@ build/
 .DS_Store
 
 # Ignorare javadoc
-PT2025_302210_Bud_Vasile_Assignment_3/**/*.html
+*.html
 *.pdf
 *.docx
