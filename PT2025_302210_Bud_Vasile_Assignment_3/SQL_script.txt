@@ -1,0 +1,80 @@
+CREATE TABLE Client (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) DEFAULT NULL,
+    email VARCHAR(100) DEFAULT NULL,
+    address VARCHAR(255) DEFAULT NULL
+);
+
+CREATE TABLE Product (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) DEFAULT NULL,
+    price DOUBLE DEFAULT '0.0',
+    stock INT DEFAULT '0'
+);
+
+CREATE TABLE Orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    client_id INT DEFAULT '0',
+    product_id INT DEFAULT '0',
+    quantity INT DEFAULT '0',
+    FOREIGN KEY (client_id) REFERENCES Client(id),
+    FOREIGN KEY (product_id) REFERENCES Product(id)
+);
+
+CREATE TABLE Log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT DEFAULT '0',
+    client_name VARCHAR(100) DEFAULT NULL,
+    product_name VARCHAR(100) DEFAULT NULL,
+    quantity INT DEFAULT '0',
+    total_price DOUBLE DEFAULT '0.0',
+    FOREIGN KEY (order_id) REFERENCES Orders(id)
+);
+
+INSERT INTO Client (name, email, address) VALUES
+('Ana Popescu', 'ana.popescu@example.com', 'Str. Lalelelor 10'),
+('Mihai Ionescu', 'mihai.ionescu@example.com', 'Bd. Independentei 45'),
+('Ioana Georgescu', 'ioana.georgescu@example.com', 'Calea Dorobanților 99'),
+('Alina Dobre', 'alina.dobre@example.com', 'Str. Viitorului 2'),
+('George Vasilescu', 'george.vasilescu@example.com', 'Bd. Decebal 77'),
+('Elena Marinescu', 'elena.marinescu@example.com', 'Str. Pictorului 15'),
+('Andrei Pop', 'andrei.pop@example.com', 'Aleea Castanilor 12'),
+('Radu Enache', 'radu.enache@example.com', 'Str. Turnului 41'),
+('Simona Rusu', 'simona.rusu@example.com', 'Str. Viilor 9'),
+('Carmen Ilie', 'carmen.ilie@example.com', 'Bd. Eroilor 101');
+
+INSERT INTO Product (name, price, stock) VALUES
+('Laptop Lenovo', 3500.50, 12),
+('Monitor Samsung', 899.99, 25),
+('Tastatură Logitech', 199.00, 40),
+('Mouse Razer', 299.99, 33),
+('Imprimantă HP', 649.49, 15),
+('Casti JBL', 379.90, 50),
+('SSD Samsung 1TB', 489.00, 20),
+('HDD WD 2TB', 299.00, 18),
+('Router TP-Link', 149.99, 60),
+('Webcam Logitech', 249.99, 22);
+
+INSERT INTO Orders (client_id, product_id, quantity) VALUES
+(1, 1, 1),
+(2, 3, 2),
+(3, 2, 1),
+(4, 5, 1),
+(5, 4, 3),
+(6, 6, 1),
+(7, 7, 2),
+(8, 10, 1),
+(9, 9, 4),
+(10, 8, 2);
+
+INSERT INTO Log (order_id, client_name, product_name, quantity, total_price) VALUES
+(1, 'Ana Popescu', 'Laptop Lenovo', 1, 3500.50),
+(2, 'Mihai Ionescu', 'Tastatură Logitech', 2, 398.00),
+(3, 'Ioana Georgescu', 'Monitor Samsung', 1, 899.99),
+(4, 'Alina Dobre', 'Imprimantă HP', 1, 649.49),
+(5, 'George Vasilescu', 'Mouse Razer', 3, 899.97),
+(6, 'Elena Marinescu', 'Casti JBL', 1, 379.90),
+(7, 'Andrei Pop', 'SSD Samsung 1TB', 2, 978.00),
+(8, 'Radu Enache', 'Webcam Logitech', 1, 249.99),
+(9, 'Simona Rusu', 'Router TP-Link', 4, 599.96),
+(10, 'Carmen Ilie', 'HDD WD 2TB', 2, 598.00);
